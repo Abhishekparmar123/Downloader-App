@@ -32,6 +32,7 @@ def index(request):
                 video.append(j.resolution)
 
             audio.sort()
+            video= list(set(video))
             video.sort()
             print(audio, video)
             print(thumbnail)
