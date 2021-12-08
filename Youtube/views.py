@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from pytube import YouTube
+import os
 
 
 # Create your views here.
 def index(request):
+    homedir = os.path.expanduser("~")
+    dirs = homedir + "/Downloads/"
     print("outside loop")
     if request.method == 'POST':
         link = request.POST.get("youtubeLink")
@@ -32,7 +35,7 @@ def index(request):
                 video.append(j.resolution)
 
             audio.sort()
-            video= list(set(video))
+            video = list(set(video))
             video.sort()
             print(audio, video)
             print(thumbnail)
@@ -48,7 +51,7 @@ def index(request):
                 print("Download")
                 yt = YouTube(downloadAudio)
                 yt = yt.streams.filter(abr=audioQuality)
-                yt.first().download()
+                yt.first().download(dirs)
                 return render(request, 'index.html', {
                     'message': "Downloaded ..... ",
                 })
@@ -62,7 +65,7 @@ def index(request):
                 print("Download")
                 yt = YouTube(downloadVideo)
                 yt = yt.streams.filter(res=videoQuality, mime_type="video/mp4")
-                yt.first().download()
+                yt.first().download(dirs)
                 print("select video quality")
                 return render(request, 'index.html', {
                     'message': "Downloaded ..... ",
