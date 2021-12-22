@@ -18,11 +18,19 @@
     .input{
        border: 2px solid black;
        border-radius: 100px 5px;
+       height:50px;
     }
     .buttonSubmit{
         border-radius:30px 5px;
         padding-left:20px;
         padding-right:20px;
+    }
+    @media (min-width:768px){
+        body{
+            margin-left:20%;
+            margin-right:20%;
+            width:60%;
+        }
     }
 
 {% endblock %}
@@ -95,6 +103,10 @@
                             <button name="downloadVideo" class="btn btn-primary download" type="submit" value={{ link }}>Download</button>
                         </form>
                     </div>
+                </div>
+            {% else %}
+                <div class="mt-5 p-3" style="border-radius: 50px; display: flex; justify-content: center; align-items: center">
+                    <img src="{% static 'images/loading-gif-youtube-2.gif' %}" alt="GIF not loaded" width="200px" height="160px"/>
                 </div>
             {% endif %}
         </div>
