@@ -85,8 +85,8 @@
                         {% csrf_token %}
                         <select name="AudioQuality" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                             <option selected>Audio Quality</option>
-                            {% for i in audio %}
-                                <option value={{ i }}>{{ i }}</option>
+                            {% for i, j in audio %}
+                                <option value={{ i }}>{{ i }}&nbsp;&nbsp;&nbsp;&nbsp;{{ j }} MB</option>
                             {% endfor %}
                         </select>
                         <button name="downloadAudio" class="btn btn-primary download" type="submit" value={{ link }}>Download</button>
@@ -96,8 +96,8 @@
                         {% csrf_token %}
                             <select name="VideoQuality" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                 <option selected>Video Quality</option>
-                                {% for i in video %}
-                                    <option value={{ i }}>{{ i }}</option>
+                                {% for i, j in video %}
+                                    <option value={{ i }}>{{ i }}&nbsp;&nbsp;&nbsp;&nbsp;{{ j }} MB</option>
                                 {% endfor %}
                             </select>
                             <button name="downloadVideo" class="btn btn-primary download" type="submit" value={{ link }}>Download</button>

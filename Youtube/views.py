@@ -22,21 +22,28 @@ def index(request):
             thumbnail = yt.thumbnail_url
 
             audio = []
+            audio_size = []
             video = []
+            video_size = []
             for i in yt.streams.filter(only_audio=True):
                 print(i)
                 audio.append(i.abr)
+                size = i.filesize / (1024 * 1024)
+                size = round(size, 2)
+                audio_size.append(size)
             for j in yt.streams.filter(only_video=True, mime_type="video/mp4"):
                 video.append(j.resolution)
-
+                size = j.filesize / (1024 * 1024)
+                size = round(size, 2)
+                video_size.append(size)
             audio.sort()
             video = list(set(video))
             video.sort()
             return render(request, 'index.html', {
                 'thumbnail': thumbnail,
                 'title': title,
-                'audio': audio,
-                'video': video,
+                'audio': zip(audio, audio_size),
+                'video': zip(video, video_size),
                 'link': link,
             })
         elif downloadAudio:
