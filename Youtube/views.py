@@ -39,6 +39,7 @@ def index(request):
             audio.sort()
             video = list(set(video))
             video.sort()
+            print(os.path.basename("hello"))
             return render(request, 'index.html', {
                 'thumbnail': thumbnail,
                 'title': title,
