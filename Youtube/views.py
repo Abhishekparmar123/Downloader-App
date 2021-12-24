@@ -20,7 +20,9 @@ def index(request):
             yt = YouTube(link)
             title = yt.title
             thumbnail = yt.thumbnail_url
-
+            string = ''
+            for i in range(len(yt.keywords)):
+                string = string + yt.keywords[i] + ', '
             audio = []
             audio_size = []
             video = []
@@ -43,6 +45,8 @@ def index(request):
             return render(request, 'index.html', {
                 'thumbnail': thumbnail,
                 'title': title,
+                'tag': string,
+                'description': yt.description,
                 'audio': zip(audio, audio_size),
                 'video': zip(video, video_size),
                 'link': link,
